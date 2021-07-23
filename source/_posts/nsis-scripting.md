@@ -6,8 +6,11 @@ tags: [NSIS, nsis, script, scripting]
 
 ### Типичный скрипт NSIS состоит из:
 * Глобальных переменных (Var nameServer)
+
 * Стэка
+
 * Регистров ($0-$9,$R0-$R9)
+
 * Встроенных функций (StrCmp, IntCmp, IfErrors, Goto ...)
 ``` nsis
 StrCmp $0 'some value' 0 +3
@@ -20,6 +23,7 @@ StrCmp $0 'some other value' 0 +3
   MessageBox MB_OK '$$0 is "$0"'
 done:
 ```
+
 * удобной библиотеки LogicLib, превращающей логические операции встроенных функций в некое подобие высокоуровневой библиотеки
 ``` nsis
 ${If} $0 == 'some value'
@@ -32,14 +36,28 @@ ${EndIf}
 
 ${Switch}, ${If}, ${While}, ${For} etc.
 ```
-* Comments  ; # /**/ 
-* Next line hyphenation   \
-* Var BLA ;Declare the variable
-* StrCpy $BLA "123" ;Now you can use the variable $BLA
-* !include LogicLib.nsh
-* !define APPNAME "Installer“
 
-* Branching
+* Комментариев  ; # /**/ 
+
+* Переноса на следующую строку   \
+
+* Объявления и использования переменных
+```nsis
+Var BLA ;Declare the variable
+StrCpy $BLA "123" ;Now you can use the variable $BLA
+```
+
+* Подключения внешних скриптов 
+```nsis
+!include LogicLib.nsh
+```
+
+* Определения констант 
+```nsis
+!define APPNAME "Installer“
+```
+
+* Ветвления
 ``` nsis
 ${If} $Dialog == error
 	Abort
@@ -51,7 +69,7 @@ ${AndIf} ${SectionIsSelected} ${SectionAgent}
 ${EndIf}
 ```
 
-* Functions
+* Функций
 ``` nsis
 Function bla
   Push $R0
@@ -68,7 +86,7 @@ Function un.bla
 FunctionEnd
 ```
 
-* Macros
+* Макросов
 ``` nsis
 !macro LogDetailPrintMessageBox message
 	!insertmacro GetTimeStampString $R9
@@ -80,7 +98,8 @@ FunctionEnd
 !macroend
 ```
 
-* MessageBoxes
+* Окон сообщений MessageBox
+```nsis
 MessageBox MB_OK "simple message box"
 MessageBox MB_YESNO "is it true?" IDYES true IDNO false
 true:
@@ -89,12 +108,15 @@ true:
 false:
   DetailPrint "it's false"
 next:
+```
 
-* DetailPrint
+* Отладочных сообщений DetailPrint
+```nsis
 DetailPrint "this message will show on the installation window"
+```
 
-* Sections
-
+* Секций Sections
+```nsis
 Section "-hidden section"
 SectionEnd
 
@@ -127,9 +149,10 @@ Section "Uninstall"
   RMDir $INSTDIR
   DeleteRegKey HKLM SOFTWARE\myApp
 SectionEnd
+```
 
-* Plug-in DLLs
-
+* Плагинов Plug-in DLLs
+```nsis
 SimpleSC::ExistsService "$paramServiceName"
 Pop $0 ; returns an errorcode if the service doesn?t exists (<>0)/service exists (0)
 ${If} $0 == 0
@@ -143,9 +166,10 @@ ${If} ${Errors}
 	Call smartRemover
 	Abort
 ${EndIf}
+```
 
-* Modern User Interface
-
+* Шаблонов современного пользовательского интерфейса Modern User Interface
+```nsis
 Installer pages
 MUI_PAGE_WELCOME
 MUI_PAGE_LICENSE textfile
@@ -163,3 +187,4 @@ MUI_UNPAGE_COMPONENTS
 MUI_UNPAGE_DIRECTORY
 MUI_UNPAGE_INSTFILES
 MUI_UNPAGE_FINISH
+```

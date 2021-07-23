@@ -26,6 +26,8 @@ tags: [NSIS, nsis]
 * Секции (установка, деинсталляция ...)
 * Функции (.onInit, un.onInit, .onGUIInit, .onInstSuccess, .onInstFailed, .onMouseOverSection ...)
 
+Подробнее о синтаксисе NSIS можно ознакомиться тут: [Введение в синтаксис NSIS скриптов]()
+
 Пример простого NSIS скрипта:
 ``` nsis
 !include "MUI2.nsh"
