@@ -26,7 +26,7 @@ tags: [NSIS, nsis]
 * Секции (установка, деинсталляция ...)
 * Функции (.onInit, un.onInit, .onGUIInit, .onInstSuccess, .onInstFailed, .onMouseOverSection ...)
 
-Подробнее о синтаксисе NSIS можно ознакомиться тут: [Введение в синтаксис NSIS скриптов]()
+Подробнее с синтаксисом NSIS можно ознакомиться тут: [Введение в синтаксис NSIS скриптов](https://ostart.github.io/2021/07/18/nsis-scripting/)
 
 Пример простого NSIS скрипта:
 ``` nsis
@@ -61,7 +61,7 @@ Section "-OneTwo"
 SectionEnd
 ```
 
-Для работы со скриптами рекомендую пользоваться программой [Venis IX](https://nsis.sourceforge.io/Venis_IX). О работе с ней будет отдельный пост.
+Для работы со скриптами рекомендую пользоваться программой [Venis IX](https://nsis.sourceforge.io/Venis_IX). Работа с программой описана тут: [Работа с NSIS скриптами в Venis_IX](https://ostart.github.io/2021/07/23/venis-IX/).
 
 В конце хотел бы привести несколько типичных изображений работы установщика NSIS с которым каждый пользователь Windows хоть раз, да сталкивался:
 
