@@ -22,8 +22,8 @@ private static readonly HttpClient Client = new HttpClient(new HttpClientHandler
 Оказалось, что мною используемый подход:
 
 ``` csharp
-Client.DefaultRequestHeaders.Clear(); // don't work for concurrency
-Client.DefaultRequestHeaders.Add("Authorization", token); // don't work for concurrency
+Client.DefaultRequestHeaders.Clear(); // doesn't work for concurrency
+Client.DefaultRequestHeaders.Add("Authorization", token); // doesn't work for concurrency
 var response = await Client.GetAsync(requestUri);
 response.EnsureSuccessStatusCode();
 
