@@ -1,7 +1,7 @@
 ---
 title: Преобразование массива байтов во float в JavaScript
 date: 2021-09-07 18:08:00
-tags: [JavaScript, JS, ClearScript]
+tags: [JavaScript, ClearScript, JS]
 ---
 
 Если вам требует в JavaScript преобразовать массив из 4-х байтов в число с плавающей точкой единичной точности (float), то можно воспользоваться следующей функцией:

@@ -1,7 +1,7 @@
 ---
 title: ClearScript. Добавь скрипты в своё .NET приложение
 date: 2021-09-07 16:14:06
-tags: [C#, JavaScript, JS]
+tags: [C#, JavaScript, ClearScript, JS]
 ---
 
 Были времена, когда обработку скриптов в .NET реализовывали проекты [IronPython](https://ironpython.net/) и [IronRuby](http://ironruby.net/). IronRuby уже умер, IronPython ещё жив, но надо признать, что не набрал популярности несмотря на солидный возраст. Если вам требуется использовать сценарии в своём .NET приложении обратите внимание на ClearScript.
