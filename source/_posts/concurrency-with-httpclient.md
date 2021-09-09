@@ -9,6 +9,7 @@ tags: [C#, HttpClient, Headers, DefaultRequestHeaders, thread-safe, concurrency]
 ``` csharp
 private static readonly HttpClient Client = new HttpClient();
 ```
+
 или если не требуется, чтобы использовались Cookies:
 
 ``` csharp
