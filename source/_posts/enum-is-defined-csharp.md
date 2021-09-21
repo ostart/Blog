@@ -1,5 +1,5 @@
 ---
-title: Enum.IsDefined и с чем "едят" его самодельную альтернативу
+title: Enum.IsDefined и его самодельная альтернатива
 date: 2021-09-18 09:20:27
 tags: [C#, Enum, BenchmarkDotNet, ILSpy]
 ---
