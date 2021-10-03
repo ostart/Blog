@@ -56,12 +56,12 @@ class Program
 
 Установить службу в операционную систему Windows можно из командной строки, запущенной от Администратора, прямо в папке где находится служба командой: 
 ```
-KMAuthService.exe install
+AuthApiService.exe install
 ```
 
 Удалить службу можно командой:
 ```
-KMAuthService.exe uninstall
+AuthApiService.exe uninstall
 ```
 
 Всю магию установки и настройки службы берёт на себя **Topshelf**! 
