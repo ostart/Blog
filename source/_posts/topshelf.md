@@ -15,22 +15,23 @@ nuget Install-Package Topshelf
 
 Посмотреть исходный код фреймворка **TopShelf** можно на [GitHub](https://github.com/Topshelf/Topshelf)
 
-Основной класс (в нашем случае *KmAuthApiService*) должен содержать методы ``` public void Start() ``` и ``` public void Stop() ```, которые используются TopShelf при старте и остановке службы. В моём случае файл *Program.cs* же будет иметь следующий вид:
+Основной класс (в нашем случае *AuthApiService*) должен содержать методы ``` public void Start() ``` и ``` public void Stop() ```, которые используются **TopShelf** при старте и остановке службы. В моём случае файл *Program.cs* же будет иметь следующий вид:
 ``` csharp
 using Topshelf;
 
 class Program
 {
-    private const string ServiceName = "KonicaMinolta Authentication and WebAPI service";
+    private const string ServiceName = "Authentication and WebAPI service";
 
     static void Main(string[] args)
     {
         HostFactory.Run(config =>
         {
+            config.StartAutomatically(); // startup type
             config.EnableShutdown();
-            config.Service<KmAuthApiService>(service =>
+            config.Service<AuthApiService>(service =>
             {
-                service.ConstructUsing(svc => new KmAuthApiService());
+                service.ConstructUsing(svc => new AuthApiService());
                 service.WhenStarted(svc => svc.Start());
                 service.WhenStopped(svc => svc.Stop());
             });
@@ -38,6 +39,14 @@ class Program
             config.SetServiceName(ServiceName);
             config.SetDisplayName(ServiceName);
             config.SetDescription(ServiceName);
+            config.EnableServiceRecovery(service =>
+            {
+                service.OnCrashOnly();
+                service.RestartService(delayInMinutes: 0); // first failure
+                service.RestartService(delayInMinutes: 0); // second failure
+                service.RestartService(delayInMinutes: 1); // subsequent failures
+                service.SetResetPeriod(days: 1); // reset period for restart options
+            });
         });                                          
     }
 }
@@ -45,12 +54,24 @@ class Program
 
 Всю магию делает метод *HostFactory.Run*. В нём указывается класс основного тела службы с методами *Start* и *Stop*, задаётся имя службы и описание в менеджере служб Windows (*Services*). **TopShelf** позволяет провести почти такую же настройку режима работы службы, которую выполняет менеджер служб Windows, в частности задать из под кого будет запускаться служба ``` RunAsLocalSystem ``` или задать параметры перезапуска в случае падения службы с помощью ``` EnableServiceRecovery ```.
 
-Установить службу в операционную систему Windows можно из командной строки, запущенной от Администратора, командой: 
+Установить службу в операционную систему Windows можно из командной строки, запущенной от Администратора, прямо в папке где находится служба командой: 
 ```
-sc create "KonicaMinolta Authentication and WebAPI service" binPath="<путь_к_службе>\KMAuthService.exe"
+KMAuthService.exe install
 ```
 
 Удалить службу можно командой:
 ```
-sc delete "KonicaMinolta Authentication and WebAPI service"
+KMAuthService.exe uninstall
+```
+
+Всю магию установки и настройки службы берёт на себя **Topshelf**! 
+
+Службу можно установить и самостоятельно, но тогда настройки из раздела ``` EnableServiceRecovery ``` применены не будут.
+```
+sc create "Authentication and WebAPI service" binPath="<путь_к_службе>\AuthService.exe"
+```
+
+Удалить службу самостоятельно можно командой:
+```
+sc delete "Authentication and WebAPI service"
 ```
