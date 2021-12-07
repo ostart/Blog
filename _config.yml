@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Artem's Blog
-subtitle: Hi, I'm Artem Ostashchenko, a software developer. I write this blog
+title: Artemio's Blog
+subtitle: Hi, I'm Artem Ostashchenko, a software developer. I write this blog in Russian
 description: ''
 keywords: #blog, #programming, #it
 author: Artem Ostashchenko
-language: en
+language: ru
 timezone: ''
 
 # URL
