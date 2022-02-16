@@ -100,8 +100,9 @@ Elapsed time: 00:00:05.0092732
 
 Так, а где побочный эффект? Где "the code continiously starts new instances of remaining tasks on every loop"? Про какую реальность утверждает Джо "The reality is that each subsequent loop starts a brand-new set of tasks"? При исследовании Task.WhenAny паттерна на сайте Майкрософт [Обработка асинхронных задач по мере завершения (C#)](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/async/start-multiple-async-tasks-and-process-them-as-they-complete) находим примечание:
 
-**Внимание!**
-
-**Можно использовать** ```WhenAny``` **в цикле, как описано в примере, для решения проблем, которые включают небольшое число задач. Однако когда требуется обработка большого числа задач, другие методы будут более эффективны. Дополнительные сведения и примеры см. в разделе** [Обработка задач по мере их завершения](https://devblogs.microsoft.com/pfxteam/processing-tasks-as-they-complete/).
+{% blockquote %}
+Внимание!
+Можно использовать ```WhenAny``` в цикле, как описано в примере, для решения проблем, которые включают небольшое число задач. Однако когда требуется обработка большого числа задач, другие методы будут более эффективны. Дополнительные сведения и примеры см. в разделе [Обработка задач по мере их завершения](https://devblogs.microsoft.com/pfxteam/processing-tasks-as-they-complete/).
+{% endblockquote %}
 
 Предлагаю углубиться в эту тему через мой [перевод этой статьи](https://ostart.github.io/2022/02/10/processing-tasks-as-they-complete/).
