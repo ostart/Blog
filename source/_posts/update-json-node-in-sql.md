@@ -25,12 +25,12 @@ BEGIN
 
   -- Для каждого элемента массива Servers
   FOR i IN 0..len-1 LOOP
-	    -- формируем путь к ключу
+	-- формируем путь к ключу
         path := ARRAY['Servers', i::text, 'IsReferral'];
-	    -- устанавливаем значение json_data по ключу path в false
+	-- устанавливаем значение json_data по ключу path в false
         json_data = jsonb_set(json_data, path, 'false'::jsonb, true);
 
-	    -- считываем значения из json объекта json_data в переменные base и filter
+	-- считываем значения из json объекта json_data в переменные base и filter
         SELECT json_data->'Servers'->i->'Sources'->0->'Base' into base;
         SELECT json_data->'Servers'->i->'Sources'->0->'Filter' into filter;
 
@@ -39,7 +39,7 @@ BEGIN
 
         --RAISE NOTICE 'Iteration: %', ('{"Base": ' || base || ', "Filter": ' || filter || '}'); -- печатаем в консоль если требуется
 
-	    -- устанавливаем значение json_data по ключу path в сложный объект, получающийся конкатенацией переменных base и filter
+	-- устанавливаем значение json_data по ключу path в сложный объект, получающийся конкатенацией переменных base и filter
         json_data = jsonb_set(json_data, path, ('{"Base": ' || base || ', "Filter": ' || filter || '}')::jsonb, true);
   END LOOP;
 
